@@ -1,0 +1,3 @@
+[submodule "lib/vernemq"]
+	path = lib/vernemq
+	url = https://github.com/bringauto/vernemq.git
