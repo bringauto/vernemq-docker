@@ -19,9 +19,9 @@ RUN apt-get purge -y erlang git jq build-essential libssl-dev && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-COPY script/vernemq_run.sh /vernemq/vernemq_run.sh
-COPY config/vernemq.conf /etc/vernemq/vernemq.conf
-COPY config/vmq.acl /etc/vernemq/vmq.acl
+COPY --chown=1000:1000 script/vernemq_run.sh /vernemq/vernemq_run.sh
+COPY --chown=1000:1000 config/vernemq.conf /etc/vernemq/vernemq.conf
+COPY --chown=1000:1000 config/vmq.acl /etc/vernemq/vmq.acl
 
 RUN chmod +x /vernemq/vernemq_run.sh && \
     chown -R vernemq:vernemq /vernemq && \
@@ -31,6 +31,6 @@ RUN chmod +x /vernemq/vernemq_run.sh && \
 
 EXPOSE 1883 8883
 
-#USER vernemq
+USER vernemq
 
-ENTRYPOINT ["/vernemq/vernemq_run.sh"]
+CMD ["/vernemq/vernemq_run.sh"]
